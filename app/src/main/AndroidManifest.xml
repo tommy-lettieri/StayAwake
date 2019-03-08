@@ -28,6 +28,8 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/stay_awake_widget_info" />
         </receiver>
+
+        <activity android:name=".TestActivity"></activity>
     </application>
 
 </manifest>

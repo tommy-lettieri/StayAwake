@@ -17,22 +17,25 @@ public class StayAwakeWidget extends AppWidgetProvider {
     public static final String STAY_AWAKE_WIDGET_ID ="STAY_AWAKE_WIDGET_ID";
     private final static String LOG_TAG = "StayAwakeWidget";
 
-    private static void updateUI() {}
-
+    /**
+     * Update the UI for a widget
+     * @param context of the app
+     * @param appWidgetManager Manager to update the widget
+     * @param appWidgetId Id of the appWidget
+     */
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
 
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.stay_awake_widget);
-//        CharSequence widgetText = context.getString(R.string.appwidget_text);
-//        views.setTextViewText(R.id.appwidget_text, widgetText);
-
+        // Determine UI updates based on state
         int backgroundColor;
         if(StayAwakeManager.isWakeLocked()) {
             backgroundColor = Color.GREEN;
         } else {
             backgroundColor = Color.RED;
         }
+        // Update UI
         views.setInt(R.id.layoutStayAwake, "setBackgroundColor", backgroundColor);
         views.setOnClickPendingIntent(R.id.layoutStayAwake, getPendingSelfIntent(context, STAY_AWAKE_CLICK_EVENT, appWidgetId));
 
@@ -40,12 +43,18 @@ public class StayAwakeWidget extends AppWidgetProvider {
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
 
+    /**
+     * This intent is used for click events
+     * @param context
+     * @param action
+     * @param appWidgetId
+     * @return A Pending Intent Broadcast
+     */
     static protected PendingIntent getPendingSelfIntent(Context context, String action, int appWidgetId) {
 //        https://stackoverflow.com/questions/8304387/android-how-do-i-force-the-update-of-all-widgets-of-a-particular-kind
 //        https://stackoverflow.com/questions/34324656/android-widget-change-background-color
 //        https://stackoverflow.com/questions/23220757/android-widget-onclick-listener-for-several-buttons
 //        https://google-developer-training.gitbooks.io/android-developer-advanced-course-practicals/content/unit-1-expand-the-user-experience/lesson-2-app-widgets/2-1-p-app-widgets/2-1-p-app-widgets.html
-
         Intent intent = new Intent(context, StayAwakeWidget.class);
         intent.setAction(action);
         intent.putExtra(STAY_AWAKE_WIDGET_ID, appWidgetId);
@@ -53,6 +62,12 @@ public class StayAwakeWidget extends AppWidgetProvider {
         return PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
     }
 
+    /**
+     * Update events
+     * @param context
+     * @param appWidgetManager
+     * @param appWidgetIds
+     */
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         // There may be multiple widgets active, so update all of them
@@ -71,6 +86,11 @@ public class StayAwakeWidget extends AppWidgetProvider {
         // Enter relevant functionality for when the last widget is disabled
     }
 
+    /**
+     * This is used for events on the widgets (for instance the click events)
+     * @param context is the app context
+     * @param intent is the event intent
+     */
     @Override
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);

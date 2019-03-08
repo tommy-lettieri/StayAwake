@@ -10,6 +10,12 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="Test"
-        android:id="@+id/btnTest"/>
+        android:text="Keep awake on"
+        android:id="@+id/btnKeepAwakeOn"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Keep awake off"
+        android:id="@+id/btnKeepAwakeOff"/>
 </LinearLayout>
