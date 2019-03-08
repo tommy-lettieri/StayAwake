@@ -9,10 +9,13 @@ import android.widget.Button;
 import java.util.concurrent.locks.Lock;
 
 public class MainActivity extends AppCompatActivity {
+    // TODO add settings
+    // TODO fix update interval
+    // TODO clean up urls
+    // TODO add locks
+    
     private Button btnKeepAwakeOn;
     private Button btnKeepAwakeOff;
-
-    private PowerManager.WakeLock wakeLock = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,37 +34,15 @@ public class MainActivity extends AppCompatActivity {
         btnKeepAwakeOn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                turnOnKeepAwake();
+                StayAwakeManager.turnOnKeepAwake(MainActivity.this);
             }
         });
 
         btnKeepAwakeOff.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                turnOffKeepAwake();
+                StayAwakeManager.turnOffKeepAwake();
             }
         });
-    }
-
-    private boolean turnOnKeepAwake() {
-        // TODO there should be a lock that locks at the beginning and end of this method and the other method (same lock)
-        if(wakeLock != null) {
-            return false;
-        }
-        PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
-        wakeLock = powerManager.newWakeLock(PowerManager.FULL_WAKE_LOCK,
-                "StayAwake::WakeLockTag");
-        wakeLock.acquire();
-        return true;
-    }
-
-    private boolean turnOffKeepAwake() {
-        // TODO there should be a lock that locks at the beginning and end of this method and the other method (same lock)
-        if(wakeLock == null) {
-            return false;
-        }
-        wakeLock.release();
-        wakeLock = null;
-        return true;
     }
 }
