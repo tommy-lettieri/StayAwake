@@ -1,9 +1,12 @@
-package com.lettieri.thomas.stayawake;
+package com.lettieri.thomas.stayawake.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import com.lettieri.thomas.stayawake.R;
+import com.lettieri.thomas.stayawake.StayAwakeManager;
 
 /**
  * This Activity is meant for testing functionality of the StayAwakeManager

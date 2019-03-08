@@ -1,4 +1,4 @@
-package com.lettieri.thomas.stayawake;
+package com.lettieri.thomas.stayawake.widgets;
 
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
@@ -8,6 +8,9 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.util.Log;
 import android.widget.RemoteViews;
+
+import com.lettieri.thomas.stayawake.R;
+import com.lettieri.thomas.stayawake.StayAwakeManager;
 
 /**
  * Implementation of App Widget functionality.

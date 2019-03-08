@@ -1,10 +1,12 @@
-package com.lettieri.thomas.stayawake;
+package com.lettieri.thomas.stayawake.activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import com.lettieri.thomas.stayawake.R;
 
 /**
  * This is the main activity for navigation to other activities
