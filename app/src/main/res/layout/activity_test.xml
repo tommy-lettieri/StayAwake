@@ -11,14 +11,28 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="horizontal">
-        <TextView
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
             android:background="#0000FF"
-            android:text="Pending"
-            android:gravity="center"
-            android:id="@+id/txtStatus"/>
+            android:layout_weight="1"
+            android:id="@+id/layoutStatus"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="Pending"
+                android:gravity="center"
+                android:id="@+id/txtStatus"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="Updated: "
+                android:gravity="center"
+                android:id="@+id/txtUpdateCount"/>
+        </LinearLayout>
         <Button
             android:layout_width="100dp"
             android:layout_height="match_parent"

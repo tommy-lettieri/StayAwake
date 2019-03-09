@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.lettieri.thomas.stayawake.R;
@@ -18,6 +19,11 @@ public class TestActivity extends AppCompatActivity {
     private Button btnKeepAwakeOff;
     private Button btnUpdate;
     private TextView txtStatus;
+    private LinearLayout layoutStatus;
+    private TextView txtUpdateCount;
+
+    private static int updateCount = 0;
+
 
     /**
      * Initial logic for the activity
@@ -41,12 +47,16 @@ public class TestActivity extends AppCompatActivity {
         btnKeepAwakeOff = findViewById(R.id.btnKeepAwakeOff);
         btnUpdate = findViewById(R.id.btnUpdate);
         txtStatus = findViewById(R.id.txtStatus);
+        layoutStatus = findViewById(R.id.layoutStatus);
+        txtUpdateCount = findViewById(R.id.txtUpdateCount);
     }
 
     /**
      * Update the status views to portray the information about the lock
      */
     private void updateStatus() {
+        updateCount++;
+        
         int color;
         String statusText;
         if(StayAwakeManager.isWakeLocked()) {
@@ -56,8 +66,9 @@ public class TestActivity extends AppCompatActivity {
             color = Color.RED;
             statusText = "UNLOCKED";
         }
-        txtStatus.setBackgroundColor(color);
+        layoutStatus.setBackgroundColor(color);
         txtStatus.setText(statusText);
+        txtUpdateCount.setText("Updated: " + updateCount);
     }
 
     /**
