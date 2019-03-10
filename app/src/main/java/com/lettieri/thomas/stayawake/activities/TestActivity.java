@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.lettieri.thomas.stayawake.R;
-import com.lettieri.thomas.stayawake.StayAwakeManager;
+import com.lettieri.thomas.stayawake.utils.StayAwakeManager;
 
 /**
  * This Activity is meant for testing functionality of the StayAwakeManager

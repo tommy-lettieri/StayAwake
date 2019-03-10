@@ -1,4 +1,4 @@
-package com.lettieri.thomas.stayawake;
+package com.lettieri.thomas.stayawake.utils;
 
 import android.content.Context;
 import android.os.PowerManager;

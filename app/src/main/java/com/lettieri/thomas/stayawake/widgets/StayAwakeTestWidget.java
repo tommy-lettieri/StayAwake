@@ -15,21 +15,24 @@ import com.lettieri.thomas.stayawake.utils.WidgetHelper;
 /**
  * Implementation of App Widget functionality.
  */
-public class StayAwakeWidget extends AppWidgetProvider {
+public class StayAwakeTestWidget extends AppWidgetProvider {
+    public final static String STAY_AWAKE_UPDATE_CLICK_EVENT = "STAY_AWAKE_UPDATE_CLICK_EVENT";
     public final static String STAY_AWAKE_CLICK_EVENT = "STAY_AWAKE_CLICK_EVENT";
-    public final static String LOG_TAG = "StayAwakeWidget";
+    public final static String LOG_TAG = "StayAwakeTestWidget";
 
+    private static int updateCount = 0;
     /**
      * Update the UI for a widget
      * @param context of the app
      * @param appWidgetManager Manager to update the widget
      * @param appWidgetId Id of the appWidget
      */
-    void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
+    public void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
-
+        // THIS IS THE SAME AS SUPERS
+        // TODO find a way to put this into a method (they layout is different...)
         // Construct the RemoteViews object
-        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.stay_awake_widget);
+        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.stay_awake_test_widget);
         // Determine UI updates based on state
         int backgroundColor;
         if(StayAwakeManager.isWakeLocked()) {
@@ -39,18 +42,18 @@ public class StayAwakeWidget extends AppWidgetProvider {
         }
         // Update UI
         views.setInt(R.id.layoutStayAwake, "setBackgroundColor", backgroundColor);
-        views.setOnClickPendingIntent(R.id.layoutStayAwake, WidgetHelper.getPendingSelfIntent(StayAwakeWidget.class, context, STAY_AWAKE_CLICK_EVENT, appWidgetId));
+        views.setOnClickPendingIntent(R.id.layoutStayAwake, WidgetHelper.getPendingSelfIntent(StayAwakeTestWidget.class, context, STAY_AWAKE_CLICK_EVENT, appWidgetId));
 
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
+
+        // THIS IS THE TEST LOGIC
+        updateCount++;
+        views.setOnClickPendingIntent(R.id.btnUpdate, WidgetHelper.getPendingSelfIntent(StayAwakeTestWidget.class, context, STAY_AWAKE_UPDATE_CLICK_EVENT, appWidgetId));
+        views.setTextViewText(R.id.txtUpdateCount, "Updated: " + updateCount);
+        appWidgetManager.updateAppWidget(appWidgetId, views);
     }
 
-    /**
-     * Update events
-     * @param context
-     * @param appWidgetManager
-     * @param appWidgetIds
-     */
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         // There may be multiple widgets active, so update all of them
@@ -62,18 +65,15 @@ public class StayAwakeWidget extends AppWidgetProvider {
     @Override
     public void onEnabled(Context context) {
         // Enter relevant functionality for when the first widget is created
+        super.onEnabled(context);
     }
 
     @Override
     public void onDisabled(Context context) {
         // Enter relevant functionality for when the last widget is disabled
+        super.onDisabled(context);
     }
 
-    /**
-     * This is used for events on the widgets (for instance the click events)
-     * @param context is the app context
-     * @param intent is the event intent
-     */
     @Override
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
